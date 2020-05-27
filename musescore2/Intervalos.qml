@@ -22,7 +22,7 @@ import QtQuick.Window 2.1
 import MuseScore 1.1
 
 MuseScore {
-      menuPath: "Plugins.ContrapontoIntervalos"
+      menuPath: "Plugins.Contraponto.Intervalos"
       description: "Contraponto Intervalos.\nPlugin para analisar e escrever os intervalos em exercícios de contraponto."
       version: "0.1ms232"
 
@@ -131,7 +131,7 @@ function mostraIntervalos() {
 
     var extraY =  (2 * (voz2 - voz1) - 2) - 1; // offset para posição eixo y de apresentação dos intervalos
 
-    if (x == 0) { var nome = newElement(Element.STAFF_TEXT); // indica entre quais vozes são os intervalos, antes do primeiro intervalo
+    if (x == 0 && vozes[1].tonal.length > 2) { var nome = newElement(Element.STAFF_TEXT); // indica entre quais vozes são os intervalos, antes do primeiro intervalo
                   nome.text = "(" + (voz1+1) + " e " + (voz2+1) + "):";
                   nome.pos.x = - 6;
                   nome.pos.y = 10.4 + extraY;
@@ -196,7 +196,7 @@ function carregarNotas() {
 
             var seg = 0;
             var carregou;
-            var trilha;
+            var trilha, compassoAtual, compasso;
             var trilhaInicial = pautaInicial * 4;
             var trilhaFinal = pautaFinal * 4;
 
