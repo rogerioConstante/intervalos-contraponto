@@ -1,5 +1,5 @@
 //=========================================================================================\\
-//  Contraponto Intervalos v0.1                                                            \\
+//  Contraponto Intervalos v0.2                                                            \\
 //                                                                                         \\
 //  Copyright (C)2018 Rogério Tavares Constante                                            \\
 //                                                                                         \\
@@ -22,9 +22,9 @@ import QtQuick.Window 2.1
 import MuseScore 3.0
 
 MuseScore {
-      menuPath: "Plugins.ContrapontoIntervalos"
+      menuPath: "Plugins.Contraponto.Intervalos"
       description: "Contraponto Intervalos.\nPlugin para analisar e escrever os intervalos em exercícios de contraponto."
-      version: "0.1ms232"
+      version: "0.2ms3"
 
 // ----------------------------------------------------------------------------------------------------------------
    MessageDialog {
@@ -127,10 +127,10 @@ function mostraIntervalos() {
 
     var extraY =  (2 * (voz2 - voz1) - 2) - 1; // offset para posição eixo y de apresentação dos intervalos
 
-    if (x == 0) { var nome = newElement(Element.STAFF_TEXT); // indica entre quais vozes são os intervalos, antes do primeiro intervalo
+    if (x == 0 && vozes[1].tonal.length > 2) { var nome = newElement(Element.STAFF_TEXT); // indica entre quais vozes são os intervalos, antes do primeiro intervalo
                   nome.text = "(" + (voz1+1) + " e " + (voz2+1) + "):";
                   nome.offsetX = - 6;
-                  nome.offsetY = 6.5 + extraY;
+                  nome.offsetY = 3 + extraY;
                   nome.placement = 1;
                   nome.autoplace = false;
                   cursor.add(nome); };
@@ -141,7 +141,10 @@ function mostraIntervalos() {
                 { myText.text = int1.slice(0,(int1.length-1)); } else {
                   myText.text = int1;};
                 };
-        myText.offsetY = 6.5 + extraY;
+        if (myText.text.length == 2) { myText.offsetX = -0.5; } else
+        if (myText.text.length == 3) { myText.offsetX = -1; } else
+        if (myText.text.length == 4) { myText.offsetX = -1.5; };
+        if (vozes[1].tonal.length == 2) { myText.offsetY = 5 + extraY; } else { myText.offsetY = 3 + extraY; }
         myText.placement = 1;
         myText.autoplace = false;
         cursor.add(myText);
@@ -199,17 +202,6 @@ function carregarNotas() {
             var trilha;
             var trilhaInicial = pautaInicial * 4;
             var trilhaFinal = pautaFinal * 4;
-
-          if (!processaTudo) {
-            cursor.rewind(0);
-            while (cursor.segment && cursor.segment.tick < posInicial) {
-     	       if (cursor.measure != compassoAtual) {
-           	   compasso++;
-           	   compassoAtual = cursor.measure;
-           	 };
-           	 cursor.next();
-            };
-          };
 
             // lê as informações da seleção (ou do documento inteiro, caso não haja seleção)
 
