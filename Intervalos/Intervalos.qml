@@ -141,9 +141,10 @@ function mostraIntervalos() {
                 { myText.text = int1.slice(0,(int1.length-1)); } else {
                   myText.text = int1;};
                 };
-        if (myText.text.length == 2) { myText.offsetX = -0.5; } else
-        if (myText.text.length == 3) { myText.offsetX = -1; } else
-        if (myText.text.length == 4) { myText.offsetX = -1.5; };
+        if (myText.text.length == 1) { myText.offsetX = 0.3; } else
+        if (myText.text.length == 2) { myText.offsetX = 0.2; } else
+        if (myText.text.length == 3) { myText.offsetX = 0.1; } else
+        if (myText.text.length == 4) { myText.offsetX = 0; };
         if (vozes[1].tonal.length == 2) { myText.offsetY = 5 + extraY; } else { myText.offsetY = 3 + extraY; }
         myText.placement = 1;
         myText.autoplace = false;
