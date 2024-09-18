@@ -1,5 +1,5 @@
 //=========================================================================================\\
-//  Contraponto Intervalos v0.2                                                            \\
+//  Contraponto Intervalos v0.22                                                           \\
 //                                                                                         \\
 //  Copyright (C)2018 Rogério Tavares Constante                                            \\
 //                                                                                         \\
@@ -24,7 +24,19 @@ import MuseScore 3.0
 MuseScore {
       menuPath: "Plugins.Contraponto.Intervalos"
       description: "Contraponto Intervalos.\nPlugin para analisar e escrever os intervalos em exercícios de contraponto."
-      version: "0.2ms3"
+      version: "0.22"
+
+      //4.4 title: "Intervalos"
+      //4.4 thumbnailName: "Intervalos.png"
+      //4.4 categoryCode: "Contraponto"
+
+      Component.onCompleted: {
+        if (mscoreMajorVersion >= 4) {
+            title = qsTr("Intervalos")
+            thumbnailName = "Intervalos.png"
+            categoryCode = "Contraponto"
+        }
+      }
 
 // ----------------------------------------------------------------------------------------------------------------
    MessageDialog {
@@ -317,7 +329,7 @@ function carregarNotas() {
   //  if (pausa) { vozes.splice(0, 1); pausa = false; };
 
    if (seg == 0) { msgErros.text += "Nenhum acorde carregado!!\n";
-                        msgErros.estado=true; Qt.quit(); };
+                        msgErros.estado=true; (typeof(quit) === 'undefined' ? Qt.quit : quit)(); };
 
 }
 // --------------------------------------
@@ -329,7 +341,7 @@ function carregarNotas() {
      msgErros.estado = false;
 
      carregarNotas();
-     if (finaliza) { Qt.quit(); };
+     if (finaliza) { (typeof(quit) === 'undefined' ? Qt.quit : quit)(); };
      mostraIntervalos();
 
   } // fecha onRun
