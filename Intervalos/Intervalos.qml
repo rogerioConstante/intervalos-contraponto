@@ -1,5 +1,5 @@
 //=========================================================================================\\
-//  Contraponto Intervalos v0.22                                                           \\
+//  Contraponto Intervalos v0.23                                                           \\
 //                                                                                         \\
 //  Copyright (C)2024 Rogério Tavares Constante                                            \\
 //                                                                                         \\
@@ -24,19 +24,20 @@ import MuseScore 3.0
 MuseScore {
       menuPath: "Plugins.Contraponto.Intervalos"
       description: "Contraponto Intervalos.\nPlugin para analisar e escrever os intervalos em exercícios de contraponto."
-      version: "0.22"
+      version: "0.23"
 
-      //4.4 title: "Intervalos"
+      //4.4 title: "Intervalos 2.23"
       //4.4 thumbnailName: "Intervalos.png"
       //4.4 categoryCode: "Contraponto"
 
       Component.onCompleted: {
         if (mscoreMajorVersion >= 4) {
-            title = qsTr("Intervalos")
+            title = qsTr("Intervalos 2.23")
             thumbnailName = "Intervalos.png"
             categoryCode = "Contraponto"
         }
       }
+
 
 // ----------------------------------------------------------------------------------------------------------------
    MessageDialog {
@@ -169,7 +170,7 @@ function mostraIntervalos() {
 
 function carregarNotas() {
 
-  console.log("Contraponto .............................................. Rogério Tavares Constante - 2019(c)")
+  console.log("Contraponto .............................................. Rogério Tavares Constante - 2024(c)")
 
   if (typeof curScore == 'undefined' || curScore == null) { // verifica se há partitura
      console.log("nenhuma partitura encontrada");
