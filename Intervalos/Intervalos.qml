@@ -16,9 +16,8 @@
 //=========================================================================================\\
 
 import QtQuick 2.3
-import QtQuick.Controls 1.3
-import QtQuick.Dialogs 1.2
-import QtQuick.Window 2.1
+import QtQuick.Controls 2.15
+import Qt.labs.platform
 import MuseScore 3.0
 
 MuseScore {
@@ -40,17 +39,16 @@ MuseScore {
 
 
 // ----------------------------------------------------------------------------------------------------------------
-   MessageDialog {
-      id: msgErros
-      title: "Erros!"
-      text: "-"
-      property bool estado: false
-      onAccepted: {
-            msgErros.visible=false;
-      }
+MessageDialog {
+  id: msgErros
+  title: "Erros!"
+  text: "-"
+  property bool estado: false
 
-      visible: false;
-} // msgErros
+  onAccepted: {
+    msgErros.estado = false;
+  }
+}
 // ---- variáveis globais ----
       property var vozes: [];
       property bool finaliza: false;
@@ -140,13 +138,13 @@ function mostraIntervalos() {
 
     var extraY =  (2 * (voz2 - voz1) - 2) - 1; // offset para posição eixo y de apresentação dos intervalos
 
-    if (x == 0 && vozes[1].tonal.length > 2) { var nome = newElement(Element.STAFF_TEXT); // indica entre quais vozes são os intervalos, antes do primeiro intervalo
-                  nome.text = "(" + (voz1+1) + " e " + (voz2+1) + "):";
-                  nome.offsetX = - 6;
-                  nome.offsetY = 3 + extraY;
-                  nome.placement = 1;
-                  nome.autoplace = false;
-                  cursor.add(nome); };
+    // if (x == 0 && vozes[1].tonal.length > 2) { var nome = newElement(Element.STAFF_TEXT); // indica entre quais vozes são os intervalos, antes do primeiro intervalo
+    //               nome.text = "(" + (voz1+1) + " e " + (voz2+1) + "):";
+    //               nome.offsetX = - 6;
+    //               nome.offsetY = 3 + extraY;
+    //               nome.placement = 1;
+    //               nome.autoplace = false;
+    //               cursor.add(nome); };
 
     var myText = newElement(Element.STAFF_TEXT);
         if ((!int1 && int1 !== 0) || int1 == "erro") { myText.text = ""; } else {
@@ -175,7 +173,7 @@ function carregarNotas() {
   if (typeof curScore == 'undefined' || curScore == null) { // verifica se há partitura
      console.log("nenhuma partitura encontrada");
      msgErros.text = "Erro! \n Nenhuma partitura encontrada!";
-                       msgErros.visible=true; finaliza = true; return; };
+                       msgErros.open(); finaliza = true; return; };
 
   //procura por uma seleção
 
