@@ -25,13 +25,13 @@ MuseScore {
       description: "Contraponto Intervalos.\nPlugin para analisar e escrever os intervalos em exercícios de contraponto."
       version: "0.23"
 
-      //4.4 title: "Intervalos 2.23"
+      //4.4 title: "Intervalos"
       //4.4 thumbnailName: "Intervalos.png"
       //4.4 categoryCode: "Contraponto"
 
       Component.onCompleted: {
         if (mscoreMajorVersion >= 4) {
-            title = qsTr("Intervalos 2.23")
+            title = qsTr("Intervalos")
             thumbnailName = "Intervalos.png"
             categoryCode = "Contraponto"
         }
